@@ -14,6 +14,7 @@ public class Add extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         Button first = findViewById(R.id.button3);
