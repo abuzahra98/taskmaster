@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,6 +34,7 @@ public class Taskadapter  extends  RecyclerView.Adapter<Taskadapter.taskHolder>{
                     Intent i = new Intent(v.getContext(), detial.class);
                    i.putExtra("title",task.title);
                     i.putExtra("body",task.body);
+                    i.putExtra("status",task.status);
 
                     v.getContext().startActivity(i);
                 }
@@ -59,9 +59,12 @@ public class Taskadapter  extends  RecyclerView.Adapter<Taskadapter.taskHolder>{
         holder.task = allTask.get(position);
         TextView titel = holder.itemView.findViewById(R.id.textView12);
         TextView body = holder.itemView.findViewById(R.id.body);
+        TextView status = holder.itemView.findViewById(R.id.aa);
 
         titel.setText(holder.task.title);
         body.setText(holder.task.body);
+        status.setText(holder.task.status);
+
 
 
 

@@ -26,5 +26,13 @@ public class detial extends AppCompatActivity {
         TextView taskNameBody = findViewById(R.id.BODY);
         taskNameBody.setText(taskB);
 
+
+
+        Intent intents = getIntent();
+        String tasks = intents.getExtras().getString("status");
+        TextView taskNamestatus = findViewById(R.id.aa);
+        taskNamestatus.setText(tasks);
+
+
     }
 }
