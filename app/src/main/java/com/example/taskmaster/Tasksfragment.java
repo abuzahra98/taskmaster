@@ -19,10 +19,11 @@ public class Tasksfragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "title";
     private static final String ARG_PARAM2 = "body";
-
+    private static final String ARG_PARAM3 = "status";
     // TODO: Rename and change types of parameters
     private String mtitle;
     private String mbody;
+    private String mstatus;
 
     public Tasksfragment() {
         // Required empty public constructor
@@ -34,14 +35,16 @@ public class Tasksfragment extends Fragment {
      *
      * @param mtitle Parameter 1.
      * @param mbody Parameter 2.
+     * @param mstatus Parameter 3.
      * @return A new instance of fragment Tasksfragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Tasksfragment newInstance(String mtitle, String mbody) {
+    public static Tasksfragment newInstance(String mtitle, String mbody,String mstatus) {
         Tasksfragment fragment = new Tasksfragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, mtitle);
         args.putString(ARG_PARAM2, mbody);
+        args.putString(ARG_PARAM3, mstatus);
         fragment.setArguments(args);
         return fragment;
     }
@@ -52,6 +55,7 @@ public class Tasksfragment extends Fragment {
         if (getArguments() != null) {
             mtitle = getArguments().getString(ARG_PARAM1);
             mbody = getArguments().getString(ARG_PARAM2);
+            mstatus = getArguments().getString(ARG_PARAM3);
         }
     }
 
