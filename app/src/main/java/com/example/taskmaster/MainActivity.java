@@ -7,7 +7,6 @@ import androidx.room.Room;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.PathDashPathEffect;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -104,7 +103,7 @@ public class MainActivity extends AppCompatActivity  {
         String welcomeMessage = "Welcome ";
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         String instructorName = sharedPreferences.getString("instructorName", "Instructor");
-        TextView instructorNameView = findViewById(R.id.welcome);
+        TextView instructorNameView = findViewById(R.id.output);
         instructorNameView.setText( instructorName + "s tasks");
     }
 }

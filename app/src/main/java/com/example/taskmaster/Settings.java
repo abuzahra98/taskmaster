@@ -41,6 +41,12 @@ public class Settings extends AppCompatActivity {
                 sharedPreferencesEditor.putString("instructorName", instructorName);
                 sharedPreferencesEditor.apply();
 
+                Intent i = new Intent(Settings.this, MainActivity.class);
+                startActivity(i);
+
+
+
+
             }
         });
 

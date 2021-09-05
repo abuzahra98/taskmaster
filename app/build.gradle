@@ -5,6 +5,8 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
+
+
         applicationId "com.example.taskmaster"
         minSdkVersion 29
         targetSdkVersion 29
@@ -35,4 +37,10 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.room:room-runtime:2.1.0'
     annotationProcessor 'androidx.room:room-compiler:2.1.0'
-}
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test:runner:1.4.0'
+    androidTestImplementation 'androidx.test:rules:1.4.0'
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
+    implementation "androidx.recyclerview:recyclerview-selection:1.1.0"
+    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.2'
+    }
