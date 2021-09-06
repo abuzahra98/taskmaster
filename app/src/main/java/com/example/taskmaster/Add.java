@@ -5,11 +5,15 @@ import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Todo;
 
 import java.util.List;
 
@@ -38,6 +42,18 @@ AppDatabase appDatabase;
 
 
                 Toast.makeText(getApplicationContext(),"submitted!",Toast.LENGTH_LONG).show();
+
+
+                Todo item = Todo.builder()
+                        .title("Lorem ipsum dolor sit amet")
+                        .body("Lorem ipsum dolor sit amet")
+                        .status("Lorem ipsum dolor sit amet")
+                        .build();
+                Amplify.DataStore.save(
+                        item,
+                        success -> Log.i("Amplify", "Saved item: " + success.item().getId()),
+                        error -> Log.e("Amplify", "Could not save item to DataStore", error)
+                );
             }
         });
     }
