@@ -9,10 +9,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.AWSDataStorePlugin;
+import com.amplifyframework.datastore.generated.model.Todo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +30,21 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+
+
+        try {
+            //Amplify.addPlugin(new AWSApiPlugin()); // UNCOMMENT this line once backend is deployed
+            Amplify.addPlugin(new AWSDataStorePlugin());
+            Amplify.configure(getApplicationContext());
+
+
+            Log.i("Amplify", "Initialized Amplify");
+
+        } catch (AmplifyException error) {
+            Log.e("Amplify", "Could not initialize Amplify", error);
+        }
+
 
           appDatabase = Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"ddd").allowMainThreadQueries().build();
         List<Task> taskList = appDatabase.taskDao().getAll();
