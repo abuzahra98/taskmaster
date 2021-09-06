@@ -8,9 +8,6 @@ mutation CreateTodo(
     title
     body
     status
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -24,9 +21,6 @@ mutation UpdateTodo(
     title
     body
     status
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -40,9 +34,6 @@ mutation DeleteTodo(
     title
     body
     status
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
