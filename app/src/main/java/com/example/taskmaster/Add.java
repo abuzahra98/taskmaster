@@ -12,7 +12,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.AWSDataStorePlugin;
 import com.amplifyframework.datastore.generated.model.Todo;
 
 import java.util.List;
@@ -34,26 +38,41 @@ AppDatabase appDatabase;
 
             @Override
             public void onClick(View v) {
-       Task task = new Task(titel.getText().toString(),body.getText().toString(),status.getText().toString());
-                appDatabase = Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"ddd").allowMainThreadQueries().build();
+//       Task task = new Task(titel.getText().toString(),body.getText().toString(),status.getText().toString());
+//                appDatabase = Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"ddd").allowMainThreadQueries().build();
 
-                TaskDao taskDao = appDatabase.taskDao();
-                appDatabase.taskDao().insertAll(task);
-
-
-                Toast.makeText(getApplicationContext(),"submitted!",Toast.LENGTH_LONG).show();
+//                TaskDao taskDao = appDatabase.taskDao();
+//                appDatabase.taskDao().insertAll(task);
 
 
-                Todo item = Todo.builder()
-                        .title("Lorem ipsum dolor sit amet")
-                        .body("Lorem ipsum dolor sit amet")
-                        .status("Lorem ipsum dolor sit amet")
+                Todo todo = Todo.builder()
+                        .title(titel.getText().toString())
+                        .body(body.getText().toString())
+                        .status(status.getText().toString())
                         .build();
-                Amplify.DataStore.save(
-                        item,
-                        success -> Log.i("Amplify", "Saved item: " + success.item().getId()),
-                        error -> Log.e("Amplify", "Could not save item to DataStore", error)
+
+
+
+                Amplify.API.mutate(
+                        ModelMutation.create(todo),
+                        response -> Log.i("MyAmplifyApp", "Added Todo with id: " + response.getData().getId()),
+                        error -> Log.e("MyAmplifyApp", "Create failed", error)
                 );
+
+//                try {
+//                    Amplify.addPlugin(new AWSApiPlugin()); // UNCOMMENT this line once backend is deployed
+//                    Amplify.addPlugin(new AWSDataStorePlugin());
+//                    Amplify.configure(getApplicationContext());
+//
+//                    Log.i("MyAmplifyApp", "Initialized Amplify");
+//
+//
+//                } catch (AmplifyException error) {
+//                    Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
+//                }
+
+
+
             }
         });
     }

@@ -33,45 +33,45 @@ public ActivityScenarioRule<MainActivity> main =
         new ActivityScenarioRule<>(MainActivity.class);
 
 
-    @Test
-    public void changeName() {
-        onView(withId(R.id.settings)).perform(click());
-
-        onView(withId(R.id.instructorNameInput)).perform(typeText(STRING_TO_BE_TYPED), closeSoftKeyboard());
-        onView(withId(R.id.save)).perform(click());
-
-        onView(withId(R.id.output)).check(matches(withText(STRING_TO_BE_TYPED+ "s tasks")));
-    }
-    @Test
-    public void testTheMainActivity() {
-        onView(withId(R.id.textView)).check(matches(withText("My Tasks")));
-    }
-
-
-    @Test
-    public void testAddNewTask() {
-        onView(withId(R.id.button1)).perform(click());
-
-        onView(withId(R.id.newTaskBody)).perform(typeText("lab31"), closeSoftKeyboard());
-        onView(withId(R.id.newTaskName)).perform(typeText("espresso"), closeSoftKeyboard());
-        onView(withId(R.id.status)).perform(typeText("in progress"), closeSoftKeyboard());
-        onView(withId(R.id.button3)).perform(click());
-        pressBack();
-        onView(ViewMatchers.withId(R.id.ss)).check(matches(isDisplayed()));
-
-    }
-
-    @Test
-    public void testTheAllTask() {
-        onView(withId(R.id.button2)).perform(click());
-        onView(withId(R.id.textView4)).check(matches(withText("All Tasks")));
-    }
-
-
-    @Test
-    public void taskDetails(){
-        onView(withId(R.id.ss)).perform(actionOnItemAtPosition(0, click()));
-        onView(withText("lab29")).check(matches(isDisplayed()));
-    }
-
+//    @Test
+//    public void changeName() {
+//        onView(withId(R.id.settings)).perform(click());
+//
+//        onView(withId(R.id.instructorNameInput)).perform(typeText(STRING_TO_BE_TYPED), closeSoftKeyboard());
+//        onView(withId(R.id.save)).perform(click());
+//
+//        onView(withId(R.id.output)).check(matches(withText(STRING_TO_BE_TYPED+ "s tasks")));
+//    }
+//    @Test
+//    public void testTheMainActivity() {
+//        onView(withId(R.id.textView)).check(matches(withText("My Tasks")));
+//    }
+//
+//
+//    @Test
+//    public void testAddNewTask() {
+//        onView(withId(R.id.button1)).perform(click());
+//
+//        onView(withId(R.id.newTaskBody)).perform(typeText("lab31"), closeSoftKeyboard());
+//        onView(withId(R.id.newTaskName)).perform(typeText("espresso"), closeSoftKeyboard());
+//        onView(withId(R.id.status)).perform(typeText("in progress"), closeSoftKeyboard());
+//        onView(withId(R.id.button3)).perform(click());
+//        pressBack();
+//        onView(ViewMatchers.withId(R.id.ss)).check(matches(isDisplayed()));
+//
+//    }
+//
+//    @Test
+//    public void testTheAllTask() {
+//        onView(withId(R.id.button2)).perform(click());
+//        onView(withId(R.id.textView4)).check(matches(withText("All Tasks")));
+//    }
+//
+//
+//    @Test
+//    public void taskDetails(){
+//        onView(withId(R.id.ss)).perform(actionOnItemAtPosition(0, click()));
+//        onView(withText("lab29")).check(matches(isDisplayed()));
+//    }
+//
 }
