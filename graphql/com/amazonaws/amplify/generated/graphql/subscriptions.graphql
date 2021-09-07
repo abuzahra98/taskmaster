@@ -5,6 +5,9 @@ subscription OnCreateTodo {
     title
     body
     status
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -15,6 +18,9 @@ subscription OnUpdateTodo {
     title
     body
     status
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -25,6 +31,9 @@ subscription OnDeleteTodo {
     title
     body
     status
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
