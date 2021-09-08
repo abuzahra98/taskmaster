@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
@@ -31,6 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity  {
+    List<Todo> taskList =new ArrayList<>();
+
     AppDatabase appDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,47 +41,15 @@ public class MainActivity extends AppCompatActivity  {
 
         setContentView(R.layout.activity_main);
 
-        RecyclerView allTasks = findViewById(R.id.ss);
-
-        Handler handler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
-            @Override
-            public boolean handleMessage(@NonNull Message message) {
-                allTasks.getAdapter().notifyDataSetChanged();
-                return false;
-            }
-        });
-        List<Todo> taskList =new ArrayList<>();
-
-
-
         try {
             Amplify.addPlugin(new AWSApiPlugin()); // UNCOMMENT this line once backend is deployed
             Amplify.addPlugin(new AWSDataStorePlugin());
             Amplify.configure(getApplicationContext());
-            Amplify.API.query(
-                    ModelQuery.list(com.amplifyframework.datastore.generated.model.Todo.class),
-//                ModelQuery.list(Todo.class),
-                    response -> {
-                        for (Todo todo : response.getData()) {
-//                            Log.i("MyAmplifyApp", todo.getTitle());
-//                            Log.i("MyAmplifyApp", todo.getBody());
-//                            Log.i("MyAmplifyApp", todo.getStatus());
-                            taskList.add(todo);
-                        }
-                        handler.sendEmptyMessage(1);
-                    },
-                    error -> Log.e("MyAmplifyApp", "Query failure", error)
-            );
-            allTasks.setLayoutManager(new LinearLayoutManager(this));
-            allTasks.setAdapter(new Taskadapter(taskList));
 
             Log.i("MyAmplifyApp", "Initialized Amplify");
         } catch (AmplifyException error) {
             Log.e("MyAmplifyApp", "Could not initialize Amplify", error);
         }
-
-
-
 
 
 //          appDatabase = Room.databaseBuilder(getApplicationContext(),AppDatabase.class,"ddd").allowMainThreadQueries().build();
@@ -159,5 +130,67 @@ public class MainActivity extends AppCompatActivity  {
         String instructorName = sharedPreferences.getString("instructorName", "Instructor");
         TextView instructorNameView = findViewById(R.id.output);
         instructorNameView.setText( instructorName + "s tasks");
+        Toast.makeText(getApplicationContext(), "onResume callback!", Toast.LENGTH_SHORT).show();
+
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        RecyclerView allTasks = findViewById(R.id.ss);
+        Handler handler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
+            @Override
+            public boolean handleMessage(@NonNull Message message) {
+                allTasks.getAdapter().notifyDataSetChanged();
+                return false;
+            }
+        });
+        Amplify.API.query(
+                ModelQuery.list(com.amplifyframework.datastore.generated.model.Todo.class),
+//                ModelQuery.list(Todo.class),
+                response -> {
+                    for (Todo todo : response.getData()) {
+
+                        taskList.add(todo);
+                    }
+                    handler.sendEmptyMessage(1);
+                },
+                error -> Log.e("MyAmplifyApp", "Query failure", error)
+        );
+        allTasks.setLayoutManager(new LinearLayoutManager(this));
+        allTasks.setAdapter(new Taskadapter(taskList));
+
+
+    }
+
+
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Toast.makeText(getApplicationContext(), "onPause callback!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Toast.makeText(getApplicationContext(), "onStop callback!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Toast.makeText(getApplicationContext(), "onRestart callback!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Toast.makeText(getApplicationContext(), "onDestroy callback!", Toast.LENGTH_SHORT).show();
+
     }
 }
+
+
