@@ -27,4 +27,6 @@ Each of the buttons displays a different taskItem title, and displays that title
 ![image description](screenshots/14.png)
 ![image description](screenshots/15.png)
 ![image description](screenshots/17.png)
-![image description](screenshots/aa.png)
+![image description](screenshots/asd.png)
+![image description](screenshots/18.png)
+![image description](screenshots/19.png)
